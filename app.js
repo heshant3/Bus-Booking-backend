@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const controller = require("./controller");
 const busController = require("./busController"); // Import the bus controller
+const userController = require("./userController"); // Import the user controller
 
 app.use(cors());
 
@@ -60,6 +61,31 @@ app.delete("/deletebusdata", (req, res) => {
 
 app.put("/updatebusdata", (req, res) => {
   busController.updateBusData(req.body, (result) => {
+    res.send(result);
+  });
+});
+
+// User Data Endpoints
+app.get("/userdata", (req, res) => {
+  userController.getUserData((data) => {
+    res.send(data);
+  });
+});
+
+app.post("/adduserdata", (req, res) => {
+  userController.addUserData(req.body, (result) => {
+    res.send(result);
+  });
+});
+
+app.delete("/deleteuserdata", (req, res) => {
+  userController.deleteUserData(req.body, (result) => {
+    res.send(result);
+  });
+});
+
+app.put("/updateuserdata", (req, res) => {
+  userController.updateUserData(req.body, (result) => {
     res.send(result);
   });
 });
