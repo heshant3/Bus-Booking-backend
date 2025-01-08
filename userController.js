@@ -1,15 +1,23 @@
 const UserModel = require("./userModel");
 
 // Get all users
+// Get user by email
 const getUserData = (req, res, next) => {
-  UserModel.find()
-    .then((response) => {
-      res.json({ response });
+  const email = req.query.email; // Get the email from the request query parameters
+
+  if (!email) {
+    return res.status(400).json({ message: "Email is required." });
+  }
+
+  UserModel.findOne({ email: email }) // Use findOne to get a single user by email
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ message: "User not found." });
+      }
+      res.json({ response: user });
     })
     .catch((error) => {
-      res.json({
-        message: error,
-      });
+      res.status(500).json({ message: error.message });
     });
 };
 

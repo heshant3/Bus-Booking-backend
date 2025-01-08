@@ -14,6 +14,7 @@ const getBookingData = (req, res, next) => {
 
 const addBookingData = (req, res, next) => {
   const newBooking = new BookingModel({
+    userId: req.body.userId,
     bookingId: req.body.bookingId,
     from: req.body.from,
     to: req.body.to,

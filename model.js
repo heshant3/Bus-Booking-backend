@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const BookingSchema = new Schema({
+  userId: String,
   bookingId: Number,
   from: String,
   to: String,
